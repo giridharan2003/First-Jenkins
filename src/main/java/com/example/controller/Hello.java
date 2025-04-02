@@ -12,4 +12,9 @@ public class Hello {
 		return "Hello Welcome To Jenkins";
 	}
 	
+	@GetMapping("get")
+	public String getExit() {
+		return "Get Lost";
+	}
+	
 }
