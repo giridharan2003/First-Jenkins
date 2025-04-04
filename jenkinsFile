@@ -18,16 +18,22 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t giridharan2003/app .'
+            }
+        }
         
         stage('Push Image to DockerHub') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'Docker-Hub', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-    				// some block
-    				 bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
-					}
+                        bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
+                    }
                     bat 'docker push giridharan2003/app'
                 }
             }
+        }
     }
 }
