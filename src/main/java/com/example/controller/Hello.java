@@ -17,4 +17,9 @@ public class Hello {
 		return "Get Lost";
 	}
 	
+	@GetMapping("give")
+	public String getIN() {
+		return "Get Hub";
+	}
+	
 }
